@@ -55,6 +55,16 @@ python train.py --model both --limit 4096 --epochs 2
 
 Use `--device mps` on a compatible Apple Silicon machine, `--device cuda` on an NVIDIA machine, or leave the default `--device auto`.
 
+## Lite UI
+
+Launch the local interface after installing the requirements:
+
+```bash
+streamlit run app.py
+```
+
+Open the local URL shown by Streamlit. The app provides a synthetic collection generator, VAE reconstruction and latent interpolation from uploaded images, and training metrics with saved sample previews. It automatically uses CUDA, Apple MPS, or CPU and loads checkpoints from `outputs/`.
+
 ## Design choices
 
 The VAE uses `[0, 1]` inputs, a sigmoid decoder, binary cross-entropy reconstruction loss, and KL divergence to a standard normal prior. The GAN uses `[-1, 1]` inputs, a tanh generator, and `BCEWithLogitsLoss` for stable discriminator training. The interpolation figure encodes two examples with the VAE mean vectors and decodes eight linear points between them.
